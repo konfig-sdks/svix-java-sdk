@@ -46,7 +46,7 @@ info:
 
     This API features Cross-Origin Resource Sharing (CORS) implemented in compliance with [W3C spec](https://www.w3.org/TR/cors/). And that allows cross-domain communication from the browser. All responses have a wildcard same-origin which makes them completely public and accessible to everyone, including any code on any site.
   title: Svix API
-  version: 1.20.0
+  version: 1.21.0
   x-logo:
     altText: Svix Logo
     url: https://www.svix.com/static/img/brand-padded.svg
@@ -88,7 +88,7 @@ paths:
     post:
       description: Use this function to get magic links (and authentication codes)
         for connecting your users to the Consumer Application Portal.
-      operationId: Authentication_obtainMagicLinkAndCode
+      operationId: Authentication_generateMagicLinks
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -262,7 +262,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'POST' \
-            'https://api.eu.svix.com/api/v1/auth/app-portal-access/{app_id}/' \
+            'https://api.eu.svix.com/api/v1/auth/app-portal-access/{app_id}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -281,7 +281,7 @@ paths:
         DEPRECATED: Please use `app-portal-access` instead.
 
         Use this function to get magic links (and authentication codes) for connecting your users to the Consumer Application Portal.
-      operationId: Authentication_generateMagicLink
+      operationId: Authentication_getMagicLinks
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -409,7 +409,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'POST' \
-            'https://api.eu.svix.com/api/v1/auth/dashboard-access/{app_id}/' \
+            'https://api.eu.svix.com/api/v1/auth/dashboard-access/{app_id}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -422,7 +422,7 @@ paths:
         Logout an app token.
 
         Trying to log out other tokens will fail.
-      operationId: Authentication_revokeToken
+      operationId: Authentication_logoutToken
       parameters:
       - description: The request's idempotency key
         explode: false
@@ -527,7 +527,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'POST' \
-            'https://api.eu.svix.com/api/v1/auth/logout/' \
+            'https://api.eu.svix.com/api/v1/auth/logout' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -537,7 +537,7 @@ paths:
   /api/v1/auth/app/{app_id}/expire-all:
     post:
       description: Expire all of the tokens associated with a specific Application
-      operationId: Authentication_expireAppTokens
+      operationId: Authentication_expireAllTokens
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -696,7 +696,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'POST' \
-            'https://api.eu.svix.com/api/v1/auth/app/{app_id}/expire-all/' \
+            'https://api.eu.svix.com/api/v1/auth/app/{app_id}/expire-all' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -845,7 +845,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/' \
+            'https://api.eu.svix.com/api/v1/app' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -1045,7 +1045,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'POST' \
-            'https://api.eu.svix.com/api/v1/app/' \
+            'https://api.eu.svix.com/api/v1/app' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -1173,7 +1173,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'DELETE' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -1299,7 +1299,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -1474,7 +1474,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'PATCH' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -1488,7 +1488,7 @@ paths:
       x-accepts: application/json
     put:
       description: Update an application.
-      operationId: Application_updateApp
+      operationId: Application_updateApplicationById
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -1671,7 +1671,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'PUT' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -1839,7 +1839,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -1851,7 +1851,7 @@ paths:
         Create a new endpoint for the application.
 
         When `secret` is `null` the secret is automatically generated (recommended)
-      operationId: Endpoint_createNew
+      operationId: Endpoint_createOrUpdate
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -2102,7 +2102,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'POST' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -2252,7 +2252,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'DELETE' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -2261,7 +2261,7 @@ paths:
       x-accepts: application/json
     get:
       description: Get an endpoint.
-      operationId: Endpoint_getEndpoint
+      operationId: Endpoint_getDetails
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -2399,7 +2399,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -2633,7 +2633,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'PATCH' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -2651,7 +2651,7 @@ paths:
       x-accepts: application/json
     put:
       description: Update an endpoint.
-      operationId: Endpoint_updateEndpoint
+      operationId: Endpoint_updateEndpointById
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -2904,7 +2904,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'PUT' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -2929,7 +2929,7 @@ paths:
 
         This is used to verify the authenticity of the webhook.
         For more information please refer to [the consuming webhooks docs](https://docs.svix.com/consuming-webhooks/).
-      operationId: Endpoint_getSecret
+      operationId: Endpoint_getSigningSecret
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -3070,7 +3070,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/secret/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/secret' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -3255,7 +3255,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'POST' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/secret/rotate/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/secret/rotate' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -3269,7 +3269,7 @@ paths:
   /api/v1/app/{app_id}/endpoint/{endpoint_id}/stats:
     get:
       description: Get basic statistics for the endpoint.
-      operationId: Endpoint_getStats
+      operationId: Endpoint_getStatistics
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -3432,7 +3432,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/stats/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/stats' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -3442,7 +3442,7 @@ paths:
   /api/v1/app/{app_id}/endpoint/{endpoint_id}/recover:
     post:
       description: Resend all failed messages since a given time.
-      operationId: Endpoint_resendFailedWebhooks
+      operationId: Endpoint_resendFailedMessages
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -3620,7 +3620,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'POST' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/recover/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/recover' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -3814,7 +3814,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'POST' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/replay-missing/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/replay-missing' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -3969,7 +3969,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/headers/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/headers' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -4144,7 +4144,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'PATCH' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/headers/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/headers' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -4157,7 +4157,7 @@ paths:
       x-accepts: application/json
     put:
       description: Set the additional headers to be sent with the webhook
-      operationId: Endpoint_updateHeaders
+      operationId: Endpoint_setWebhookHeaders
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -4323,7 +4323,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'PUT' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/headers/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/headers' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -4478,7 +4478,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/transformation/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/transformation' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -4653,7 +4653,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'PATCH' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/transformation/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/transformation' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -4667,7 +4667,7 @@ paths:
   /api/v1/app/{app_id}/endpoint/{endpoint_id}/send-example:
     post:
       description: Send an example message for event
-      operationId: Endpoint_sendExampleMessage
+      operationId: Endpoint_sendExampleMessageType
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -4845,7 +4845,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'POST' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/send-example/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/send-example' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -4859,7 +4859,7 @@ paths:
   /api/v1/event-type:
     get:
       description: Return the list of event types.
-      operationId: EventType_getList
+      operationId: EventType_list
       parameters:
       - description: Limit the number of returned items
         explode: true
@@ -5025,7 +5025,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/event-type/' \
+            'https://api.eu.svix.com/api/v1/event-type' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -5231,7 +5231,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'POST' \
-            'https://api.eu.svix.com/api/v1/event-type/' \
+            'https://api.eu.svix.com/api/v1/event-type' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -5417,7 +5417,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'POST' \
-            'https://api.eu.svix.com/api/v1/event-type/import/openapi/' \
+            'https://api.eu.svix.com/api/v1/event-type/import/openapi' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -5438,7 +5438,7 @@ paths:
         However, new messages can not be sent with it and endpoints can not filter on it.
         An event type can be unarchived with the
         [create operation](#operation/create_event_type_api_v1_event_type__post).
-      operationId: EventType_archiveType
+      operationId: EventType_archive
       parameters:
       - description: The event type's name
         explode: false
@@ -5564,7 +5564,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'DELETE' \
-            'https://api.eu.svix.com/api/v1/event-type/{event_type_name}/' \
+            'https://api.eu.svix.com/api/v1/event-type/{event_type_name}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -5573,7 +5573,7 @@ paths:
       x-accepts: application/json
     get:
       description: Get an event type.
-      operationId: EventType_getByName
+      operationId: EventType_getEventType
       parameters:
       - description: The event type's name
         explode: false
@@ -5689,7 +5689,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/event-type/{event_type_name}/' \
+            'https://api.eu.svix.com/api/v1/event-type/{event_type_name}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -5698,7 +5698,7 @@ paths:
       x-accepts: application/json
     patch:
       description: Partially update an event type.
-      operationId: EventType_partiallyUpdateType
+      operationId: EventType_partiallyUpdateEventType
       parameters:
       - description: The event type's name
         explode: false
@@ -5863,7 +5863,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'PATCH' \
-            'https://api.eu.svix.com/api/v1/event-type/{event_type_name}/' \
+            'https://api.eu.svix.com/api/v1/event-type/{event_type_name}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -5877,7 +5877,7 @@ paths:
       x-accepts: application/json
     put:
       description: Update an event type.
-      operationId: EventType_updateType
+      operationId: EventType_updateEventTypeName
       parameters:
       - description: The event type's name
         explode: false
@@ -6070,7 +6070,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'PUT' \
-            'https://api.eu.svix.com/api/v1/event-type/{event_type_name}/' \
+            'https://api.eu.svix.com/api/v1/event-type/{event_type_name}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -6087,7 +6087,7 @@ paths:
   /api/v1/background-task:
     get:
       description: List background tasks executed in the past 90 days.
-      operationId: BackgroundTasks_listRecentTasks
+      operationId: BackgroundTasks_getPastTasks
       parameters:
       - description: Filter the response based on the status
         explode: true
@@ -6202,7 +6202,7 @@ paths:
   /api/v1/background-task/{task_id}:
     get:
       description: Get a background task by ID.
-      operationId: BackgroundTasks_getTaskById
+      operationId: BackgroundTasks_getById
       parameters:
       - explode: false
         in: path
@@ -6513,7 +6513,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/msg' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -6531,7 +6531,7 @@ paths:
         Messages can also have `channels`, which similar to event types let endpoints filter by them. Unlike event types, messages can have multiple channels, and channels don't imply a specific message content or schema.
 
         The `payload` property is the webhook's body (the actual webhook message). Svix supports payload sizes of up to ~350kb, though it's generally a good idea to keep webhook payloads small, probably no larger than 40kb.
-      operationId: Message_createNew
+      operationId: Message_createNewMsg
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -6791,7 +6791,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'POST' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/msg' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -6961,7 +6961,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/{msg_id}/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/{msg_id}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -7102,7 +7102,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'DELETE' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/{msg_id}/content/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/{msg_id}/content' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -7397,7 +7397,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/attempt/endpoint/{endpoint_id}/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/attempt/endpoint/{endpoint_id}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -7413,7 +7413,7 @@ paths:
         relative to now or, if an iterator is provided, 90 days before/after the time indicated
         by the iterator ID. If you require data beyond those time ranges, you will need to explicitly
         set the `before` or `after` parameter as appropriate.
-      operationId: MessageAttempt_listByMsgAttemptedDestinations
+      operationId: MessageAttempt_listByMsg
       parameters:
       - description: Limit the number of returned items
         explode: true
@@ -7695,7 +7695,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/attempt/msg/{msg_id}/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/attempt/msg/{msg_id}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -7971,7 +7971,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/msg/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/endpoint/{endpoint_id}/msg' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -8149,7 +8149,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/{msg_id}/endpoint/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/{msg_id}/endpoint' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -8434,7 +8434,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/{msg_id}/endpoint/{endpoint_id}/attempt/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/{msg_id}/endpoint/{endpoint_id}/attempt' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -8453,7 +8453,7 @@ paths:
         set the `before` or `after` parameter as appropriate.
 
         `msg_id`: Use a message id or a message `eventId`
-      operationId: MessageAttempt_listByMsgAttemptedDestinations
+      operationId: MessageAttempt_listByMsgAttempt
       parameters:
       - description: Limit the number of returned items
         explode: true
@@ -8722,7 +8722,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/{msg_id}/attempt/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/{msg_id}/attempt' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -8732,7 +8732,7 @@ paths:
   /api/v1/app/{app_id}/msg/{msg_id}/attempt/{attempt_id}:
     get:
       description: "`msg_id`: Use a message id or a message `eventId`"
-      operationId: MessageAttempt_getByDestination
+      operationId: MessageAttempt_getByAttempt
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -8885,7 +8885,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/{msg_id}/attempt/{attempt_id}/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/{msg_id}/attempt/{attempt_id}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -9045,7 +9045,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'DELETE' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/{msg_id}/attempt/{attempt_id}/content/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/{msg_id}/attempt/{attempt_id}/content' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -9055,7 +9055,7 @@ paths:
   /api/v1/app/{app_id}/msg/{msg_id}/endpoint/{endpoint_id}/resend:
     post:
       description: Resend a message to the specified endpoint.
-      operationId: MessageAttempt_resendMessageToEndpoint
+      operationId: MessageAttempt_resendWebhook
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -9215,7 +9215,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'POST' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/{msg_id}/endpoint/{endpoint_id}/resend/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/msg/{msg_id}/endpoint/{endpoint_id}/resend' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -9229,7 +9229,7 @@ paths:
 
         Note that this endpoint is asynchronous. You will need to poll the `Get Background Task` endpoint to
         retrieve the results of the operation.
-      operationId: Statistics_calculateMessageDestinations
+      operationId: Statistics_calculateMessageDestinationsForApps
       parameters:
       - description: The request's idempotency key
         explode: false
@@ -9377,7 +9377,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'POST' \
-            'https://api.eu.svix.com/api/v1/stats/usage/app/' \
+            'https://api.eu.svix.com/api/v1/stats/usage/app' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -9395,7 +9395,7 @@ paths:
 
         Note that this endpoint is asynchronous. You will need to poll the `Get Background Task` endpoint to
         retrieve the results of the operation.
-      operationId: Statistics_calculateEventTypesForAllApps
+      operationId: Statistics_calculateEventTypesForApps
       responses:
         "202":
           content:
@@ -9495,7 +9495,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'PUT' \
-            'https://api.eu.svix.com/api/v1/stats/usage/event-types/' \
+            'https://api.eu.svix.com/api/v1/stats/usage/event-types' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -9505,7 +9505,7 @@ paths:
   /api/v1/app/{app_id}/integration:
     get:
       description: List the application's integrations.
-      operationId: Integration_listIntegrations
+      operationId: Integration_list
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -9650,7 +9650,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/integration/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/integration' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -9822,7 +9822,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'POST' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/integration/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/integration' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -9961,7 +9961,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'DELETE' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/integration/{integ_id}/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/integration/{integ_id}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -10106,7 +10106,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/integration/{integ_id}/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/integration/{integ_id}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -10115,7 +10115,7 @@ paths:
       x-accepts: application/json
     put:
       description: Update an integration.
-      operationId: Integration_updateIntegration
+      operationId: Integration_updateIntegrationById
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -10282,7 +10282,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'PUT' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/integration/{integ_id}/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/integration/{integ_id}' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
@@ -10434,7 +10434,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/integration/{integ_id}/key/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/integration/{integ_id}/key' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -10445,7 +10445,7 @@ paths:
     post:
       description: Rotate the integration's key. The previous key will be immediately
         revoked.
-      operationId: Integration_rotateIntegrationKey
+      operationId: Integration_rotateKey
       parameters:
       - description: The app's ID or UID
         explode: false
@@ -10591,7 +10591,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'POST' \
-            'https://api.eu.svix.com/api/v1/app/{app_id}/integration/{integ_id}/key/rotate/' \
+            'https://api.eu.svix.com/api/v1/app/{app_id}/integration/{integ_id}/key/rotate' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -10601,7 +10601,7 @@ paths:
   /api/v1/health:
     get:
       description: Verify the API server is up and running.
-      operationId: Health_checkServerStatus
+      operationId: Health_checkStatus
       responses:
         "204":
           description: no content
@@ -10662,7 +10662,7 @@ paths:
         lang: Shell
         source: |-
           curl -X 'GET' \
-            'https://api.eu.svix.com/api/v1/health/' \
+            'https://api.eu.svix.com/api/v1/health' \
             -H 'Authorization: Bearer AUTH_TOKEN' \
             -H 'Accept: application/json' \
             -H 'Content-Type: application/json'
@@ -14687,6 +14687,8 @@ components:
     EnvironmentSettingsOut:
       properties:
         customColor:
+          format: color
+          nullable: true
           type: string
         customLogoUrl:
           format: uri
@@ -14747,8 +14749,6 @@ components:
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-EnvironmentSettingsOut-properties-showUseSvixPlay
       type: object
-    Color:
-      type: string
     CustomThemeOverride:
       properties:
         borderRadius:
@@ -14784,22 +14784,40 @@ components:
     CustomColorPalette:
       properties:
         primary:
+          format: color
+          nullable: true
           type: string
         backgroundPrimary:
+          format: color
+          nullable: true
           type: string
         backgroundSecondary:
+          format: color
+          nullable: true
           type: string
         backgroundHover:
+          format: color
+          nullable: true
           type: string
         textPrimary:
+          format: color
+          nullable: true
           type: string
         textDanger:
+          format: color
+          nullable: true
           type: string
         interactiveAccent:
+          format: color
+          nullable: true
           type: string
         navigationAccent:
+          format: color
+          nullable: true
           type: string
         buttonPrimary:
+          format: color
+          nullable: true
           type: string
       type: object
     EnvironmentOut:
@@ -14827,6 +14845,8 @@ components:
     SettingsOut:
       properties:
         customColor:
+          format: color
+          nullable: true
           type: string
         customLogoUrl:
           format: uri
@@ -14931,6 +14951,8 @@ components:
     SettingsIn:
       properties:
         customColor:
+          format: color
+          nullable: true
           type: string
         customLogoUrl:
           format: uri

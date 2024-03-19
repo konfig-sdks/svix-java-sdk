@@ -78,7 +78,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.konfigthis</groupId>
   <artifactId>svix-java-sdk</artifactId>
-  <version>1.20.0</version>
+  <version>1.21.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -94,7 +94,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.konfigthis:svix-java-sdk:1.20.0"
+   implementation "com.konfigthis:svix-java-sdk:1.21.0"
 }
 ```
 
@@ -131,7 +131,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/svix-java-sdk-1.20.0.jar`
+* `target/svix-java-sdk-1.21.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -230,60 +230,60 @@ Class | Method | HTTP request | Description
 *ApplicationApi* | [**listAll**](docs/ApplicationApi.md#listAll) | **GET** /api/v1/app | List Applications
 *ApplicationApi* | [**partiallyUpdate**](docs/ApplicationApi.md#partiallyUpdate) | **PATCH** /api/v1/app/{app_id} | Patch Application
 *ApplicationApi* | [**removeApp**](docs/ApplicationApi.md#removeApp) | **DELETE** /api/v1/app/{app_id} | Delete Application
-*ApplicationApi* | [**updateApp**](docs/ApplicationApi.md#updateApp) | **PUT** /api/v1/app/{app_id} | Update Application
-*AuthenticationApi* | [**expireAppTokens**](docs/AuthenticationApi.md#expireAppTokens) | **POST** /api/v1/auth/app/{app_id}/expire-all | Expire All
-*AuthenticationApi* | [**generateMagicLink**](docs/AuthenticationApi.md#generateMagicLink) | **POST** /api/v1/auth/dashboard-access/{app_id} | Dashboard Access
-*AuthenticationApi* | [**obtainMagicLinkAndCode**](docs/AuthenticationApi.md#obtainMagicLinkAndCode) | **POST** /api/v1/auth/app-portal-access/{app_id} | Get Consumer App Portal Access
-*AuthenticationApi* | [**revokeToken**](docs/AuthenticationApi.md#revokeToken) | **POST** /api/v1/auth/logout | Logout
-*BackgroundTasksApi* | [**getTaskById**](docs/BackgroundTasksApi.md#getTaskById) | **GET** /api/v1/background-task/{task_id} | Get Background Task
-*BackgroundTasksApi* | [**listRecentTasks**](docs/BackgroundTasksApi.md#listRecentTasks) | **GET** /api/v1/background-task | List Background Tasks
-*EndpointApi* | [**createNew**](docs/EndpointApi.md#createNew) | **POST** /api/v1/app/{app_id}/endpoint | Create Endpoint
-*EndpointApi* | [**getEndpoint**](docs/EndpointApi.md#getEndpoint) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id} | Get Endpoint
+*ApplicationApi* | [**updateApplicationById**](docs/ApplicationApi.md#updateApplicationById) | **PUT** /api/v1/app/{app_id} | Update Application
+*AuthenticationApi* | [**expireAllTokens**](docs/AuthenticationApi.md#expireAllTokens) | **POST** /api/v1/auth/app/{app_id}/expire-all | Expire All
+*AuthenticationApi* | [**generateMagicLinks**](docs/AuthenticationApi.md#generateMagicLinks) | **POST** /api/v1/auth/app-portal-access/{app_id} | Get Consumer App Portal Access
+*AuthenticationApi* | [**getMagicLinks**](docs/AuthenticationApi.md#getMagicLinks) | **POST** /api/v1/auth/dashboard-access/{app_id} | Dashboard Access
+*AuthenticationApi* | [**logoutToken**](docs/AuthenticationApi.md#logoutToken) | **POST** /api/v1/auth/logout | Logout
+*BackgroundTasksApi* | [**getById**](docs/BackgroundTasksApi.md#getById) | **GET** /api/v1/background-task/{task_id} | Get Background Task
+*BackgroundTasksApi* | [**getPastTasks**](docs/BackgroundTasksApi.md#getPastTasks) | **GET** /api/v1/background-task | List Background Tasks
+*EndpointApi* | [**createOrUpdate**](docs/EndpointApi.md#createOrUpdate) | **POST** /api/v1/app/{app_id}/endpoint | Create Endpoint
+*EndpointApi* | [**getDetails**](docs/EndpointApi.md#getDetails) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id} | Get Endpoint
 *EndpointApi* | [**getHeaders**](docs/EndpointApi.md#getHeaders) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id}/headers | Get Endpoint Headers
-*EndpointApi* | [**getSecret**](docs/EndpointApi.md#getSecret) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id}/secret | Get Endpoint Secret
-*EndpointApi* | [**getStats**](docs/EndpointApi.md#getStats) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id}/stats | Endpoint Stats
+*EndpointApi* | [**getSigningSecret**](docs/EndpointApi.md#getSigningSecret) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id}/secret | Get Endpoint Secret
+*EndpointApi* | [**getStatistics**](docs/EndpointApi.md#getStatistics) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id}/stats | Endpoint Stats
 *EndpointApi* | [**getTransformationCode**](docs/EndpointApi.md#getTransformationCode) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id}/transformation | Get Endpoint Transformation
 *EndpointApi* | [**listEndpoints**](docs/EndpointApi.md#listEndpoints) | **GET** /api/v1/app/{app_id}/endpoint | List Endpoints
 *EndpointApi* | [**partiallySetHeaders**](docs/EndpointApi.md#partiallySetHeaders) | **PATCH** /api/v1/app/{app_id}/endpoint/{endpoint_id}/headers | Patch Endpoint Headers
 *EndpointApi* | [**partiallyUpdate**](docs/EndpointApi.md#partiallyUpdate) | **PATCH** /api/v1/app/{app_id}/endpoint/{endpoint_id} | Patch Endpoint
 *EndpointApi* | [**remove**](docs/EndpointApi.md#remove) | **DELETE** /api/v1/app/{app_id}/endpoint/{endpoint_id} | Delete Endpoint
 *EndpointApi* | [**replayMissingWebhooks**](docs/EndpointApi.md#replayMissingWebhooks) | **POST** /api/v1/app/{app_id}/endpoint/{endpoint_id}/replay-missing | Replay Missing Webhooks
-*EndpointApi* | [**resendFailedWebhooks**](docs/EndpointApi.md#resendFailedWebhooks) | **POST** /api/v1/app/{app_id}/endpoint/{endpoint_id}/recover | Recover Failed Webhooks
+*EndpointApi* | [**resendFailedMessages**](docs/EndpointApi.md#resendFailedMessages) | **POST** /api/v1/app/{app_id}/endpoint/{endpoint_id}/recover | Recover Failed Webhooks
 *EndpointApi* | [**rotateSecret**](docs/EndpointApi.md#rotateSecret) | **POST** /api/v1/app/{app_id}/endpoint/{endpoint_id}/secret/rotate | Rotate Endpoint Secret
-*EndpointApi* | [**sendExampleMessage**](docs/EndpointApi.md#sendExampleMessage) | **POST** /api/v1/app/{app_id}/endpoint/{endpoint_id}/send-example | Send Event Type Example Message
+*EndpointApi* | [**sendExampleMessageType**](docs/EndpointApi.md#sendExampleMessageType) | **POST** /api/v1/app/{app_id}/endpoint/{endpoint_id}/send-example | Send Event Type Example Message
 *EndpointApi* | [**setTransformationCode**](docs/EndpointApi.md#setTransformationCode) | **PATCH** /api/v1/app/{app_id}/endpoint/{endpoint_id}/transformation | Set Endpoint Transformation
-*EndpointApi* | [**updateEndpoint**](docs/EndpointApi.md#updateEndpoint) | **PUT** /api/v1/app/{app_id}/endpoint/{endpoint_id} | Update Endpoint
-*EndpointApi* | [**updateHeaders**](docs/EndpointApi.md#updateHeaders) | **PUT** /api/v1/app/{app_id}/endpoint/{endpoint_id}/headers | Update Endpoint Headers
-*EventTypeApi* | [**archiveType**](docs/EventTypeApi.md#archiveType) | **DELETE** /api/v1/event-type/{event_type_name} | Delete Event Type
+*EndpointApi* | [**setWebhookHeaders**](docs/EndpointApi.md#setWebhookHeaders) | **PUT** /api/v1/app/{app_id}/endpoint/{endpoint_id}/headers | Update Endpoint Headers
+*EndpointApi* | [**updateEndpointById**](docs/EndpointApi.md#updateEndpointById) | **PUT** /api/v1/app/{app_id}/endpoint/{endpoint_id} | Update Endpoint
+*EventTypeApi* | [**archive**](docs/EventTypeApi.md#archive) | **DELETE** /api/v1/event-type/{event_type_name} | Delete Event Type
 *EventTypeApi* | [**createOrUpdate**](docs/EventTypeApi.md#createOrUpdate) | **POST** /api/v1/event-type | Create Event Type
-*EventTypeApi* | [**getByName**](docs/EventTypeApi.md#getByName) | **GET** /api/v1/event-type/{event_type_name} | Get Event Type
-*EventTypeApi* | [**getList**](docs/EventTypeApi.md#getList) | **GET** /api/v1/event-type | List Event Types
+*EventTypeApi* | [**getEventType**](docs/EventTypeApi.md#getEventType) | **GET** /api/v1/event-type/{event_type_name} | Get Event Type
 *EventTypeApi* | [**importFromOpenapi**](docs/EventTypeApi.md#importFromOpenapi) | **POST** /api/v1/event-type/import/openapi | Event Type Import From Openapi
-*EventTypeApi* | [**partiallyUpdateType**](docs/EventTypeApi.md#partiallyUpdateType) | **PATCH** /api/v1/event-type/{event_type_name} | Patch Event Type
-*EventTypeApi* | [**updateType**](docs/EventTypeApi.md#updateType) | **PUT** /api/v1/event-type/{event_type_name} | Update Event Type
-*HealthApi* | [**checkServerStatus**](docs/HealthApi.md#checkServerStatus) | **GET** /api/v1/health | Health
+*EventTypeApi* | [**list**](docs/EventTypeApi.md#list) | **GET** /api/v1/event-type | List Event Types
+*EventTypeApi* | [**partiallyUpdateEventType**](docs/EventTypeApi.md#partiallyUpdateEventType) | **PATCH** /api/v1/event-type/{event_type_name} | Patch Event Type
+*EventTypeApi* | [**updateEventTypeName**](docs/EventTypeApi.md#updateEventTypeName) | **PUT** /api/v1/event-type/{event_type_name} | Update Event Type
+*HealthApi* | [**checkStatus**](docs/HealthApi.md#checkStatus) | **GET** /api/v1/health | Health
 *IntegrationApi* | [**createNewIntegration**](docs/IntegrationApi.md#createNewIntegration) | **POST** /api/v1/app/{app_id}/integration | Create Integration
 *IntegrationApi* | [**deleteById**](docs/IntegrationApi.md#deleteById) | **DELETE** /api/v1/app/{app_id}/integration/{integ_id} | Delete Integration
 *IntegrationApi* | [**getById**](docs/IntegrationApi.md#getById) | **GET** /api/v1/app/{app_id}/integration/{integ_id} | Get Integration
 *IntegrationApi* | [**getKey**](docs/IntegrationApi.md#getKey) | **GET** /api/v1/app/{app_id}/integration/{integ_id}/key | Get Integration Key
-*IntegrationApi* | [**listIntegrations**](docs/IntegrationApi.md#listIntegrations) | **GET** /api/v1/app/{app_id}/integration | List Integrations
-*IntegrationApi* | [**rotateIntegrationKey**](docs/IntegrationApi.md#rotateIntegrationKey) | **POST** /api/v1/app/{app_id}/integration/{integ_id}/key/rotate | Rotate Integration Key
-*IntegrationApi* | [**updateIntegration**](docs/IntegrationApi.md#updateIntegration) | **PUT** /api/v1/app/{app_id}/integration/{integ_id} | Update Integration
-*MessageApi* | [**createNew**](docs/MessageApi.md#createNew) | **POST** /api/v1/app/{app_id}/msg | Create Message
+*IntegrationApi* | [**list**](docs/IntegrationApi.md#list) | **GET** /api/v1/app/{app_id}/integration | List Integrations
+*IntegrationApi* | [**rotateKey**](docs/IntegrationApi.md#rotateKey) | **POST** /api/v1/app/{app_id}/integration/{integ_id}/key/rotate | Rotate Integration Key
+*IntegrationApi* | [**updateIntegrationById**](docs/IntegrationApi.md#updateIntegrationById) | **PUT** /api/v1/app/{app_id}/integration/{integ_id} | Update Integration
+*MessageApi* | [**createNewMsg**](docs/MessageApi.md#createNewMsg) | **POST** /api/v1/app/{app_id}/msg | Create Message
 *MessageApi* | [**deletePayload**](docs/MessageApi.md#deletePayload) | **DELETE** /api/v1/app/{app_id}/msg/{msg_id}/content | Delete message payload
 *MessageApi* | [**getByIdOrEventId**](docs/MessageApi.md#getByIdOrEventId) | **GET** /api/v1/app/{app_id}/msg/{msg_id} | Get Message
 *MessageApi* | [**listAllMessages**](docs/MessageApi.md#listAllMessages) | **GET** /api/v1/app/{app_id}/msg | List Messages
 *MessageAttemptApi* | [**deleteResponseBody**](docs/MessageAttemptApi.md#deleteResponseBody) | **DELETE** /api/v1/app/{app_id}/msg/{msg_id}/attempt/{attempt_id}/content | Delete attempt response body
-*MessageAttemptApi* | [**getByDestination**](docs/MessageAttemptApi.md#getByDestination) | **GET** /api/v1/app/{app_id}/msg/{msg_id}/attempt/{attempt_id} | Get Attempt
+*MessageAttemptApi* | [**getByAttempt**](docs/MessageAttemptApi.md#getByAttempt) | **GET** /api/v1/app/{app_id}/msg/{msg_id}/attempt/{attempt_id} | Get Attempt
 *MessageAttemptApi* | [**listAttemptedDestinations**](docs/MessageAttemptApi.md#listAttemptedDestinations) | **GET** /api/v1/app/{app_id}/msg/{msg_id}/endpoint | List Attempted Destinations
 *MessageAttemptApi* | [**listAttemptedMessages**](docs/MessageAttemptApi.md#listAttemptedMessages) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id}/msg | List Attempted Messages
 *MessageAttemptApi* | [**listByEndpoint**](docs/MessageAttemptApi.md#listByEndpoint) | **GET** /api/v1/app/{app_id}/attempt/endpoint/{endpoint_id} | List Attempts By Endpoint
 *MessageAttemptApi* | [**listByEndpointDeprecated**](docs/MessageAttemptApi.md#listByEndpointDeprecated) | **GET** /api/v1/app/{app_id}/msg/{msg_id}/endpoint/{endpoint_id}/attempt | List Attempts For Endpoint
-*MessageAttemptApi* | [**listByMsgAttemptedDestinations**](docs/MessageAttemptApi.md#listByMsgAttemptedDestinations) | **GET** /api/v1/app/{app_id}/attempt/msg/{msg_id} | List Attempts By Msg
-*MessageAttemptApi* | [**listByMsgAttemptedDestinations_0**](docs/MessageAttemptApi.md#listByMsgAttemptedDestinations_0) | **GET** /api/v1/app/{app_id}/msg/{msg_id}/attempt | List Attempts
-*MessageAttemptApi* | [**resendMessageToEndpoint**](docs/MessageAttemptApi.md#resendMessageToEndpoint) | **POST** /api/v1/app/{app_id}/msg/{msg_id}/endpoint/{endpoint_id}/resend | Resend Webhook
-*StatisticsApi* | [**calculateEventTypesForAllApps**](docs/StatisticsApi.md#calculateEventTypesForAllApps) | **PUT** /api/v1/stats/usage/event-types | Aggregate Event Types
-*StatisticsApi* | [**calculateMessageDestinations**](docs/StatisticsApi.md#calculateMessageDestinations) | **POST** /api/v1/stats/usage/app | Aggregate App Stats
+*MessageAttemptApi* | [**listByMsg**](docs/MessageAttemptApi.md#listByMsg) | **GET** /api/v1/app/{app_id}/attempt/msg/{msg_id} | List Attempts By Msg
+*MessageAttemptApi* | [**listByMsgAttempt**](docs/MessageAttemptApi.md#listByMsgAttempt) | **GET** /api/v1/app/{app_id}/msg/{msg_id}/attempt | List Attempts
+*MessageAttemptApi* | [**resendWebhook**](docs/MessageAttemptApi.md#resendWebhook) | **POST** /api/v1/app/{app_id}/msg/{msg_id}/endpoint/{endpoint_id}/resend | Resend Webhook
+*StatisticsApi* | [**calculateEventTypesForApps**](docs/StatisticsApi.md#calculateEventTypesForApps) | **PUT** /api/v1/stats/usage/event-types | Aggregate Event Types
+*StatisticsApi* | [**calculateMessageDestinationsForApps**](docs/StatisticsApi.md#calculateMessageDestinationsForApps) | **POST** /api/v1/stats/usage/app | Aggregate App Stats
 
 
 ## Documentation for Models

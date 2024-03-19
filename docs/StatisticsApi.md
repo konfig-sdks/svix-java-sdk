@@ -4,13 +4,13 @@ All URIs are relative to *https://api.eu.svix.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**calculateEventTypesForAllApps**](StatisticsApi.md#calculateEventTypesForAllApps) | **PUT** /api/v1/stats/usage/event-types | Aggregate Event Types |
-| [**calculateMessageDestinations**](StatisticsApi.md#calculateMessageDestinations) | **POST** /api/v1/stats/usage/app | Aggregate App Stats |
+| [**calculateEventTypesForApps**](StatisticsApi.md#calculateEventTypesForApps) | **PUT** /api/v1/stats/usage/event-types | Aggregate Event Types |
+| [**calculateMessageDestinationsForApps**](StatisticsApi.md#calculateMessageDestinationsForApps) | **POST** /api/v1/stats/usage/app | Aggregate App Stats |
 
 
-<a name="calculateEventTypesForAllApps"></a>
-# **calculateEventTypesForAllApps**
-> AggregateEventTypesOut calculateEventTypesForAllApps().execute();
+<a name="calculateEventTypesForApps"></a>
+# **calculateEventTypesForApps**
+> AggregateEventTypesOut calculateEventTypesForApps().execute();
 
 Aggregate Event Types
 
@@ -41,14 +41,14 @@ public class Example {
     try {
       AggregateEventTypesOut result = client
               .statistics
-              .calculateEventTypesForAllApps()
+              .calculateEventTypesForApps()
               .execute();
       System.out.println(result);
       System.out.println(result.getId());
       System.out.println(result.getStatus());
       System.out.println(result.getTask());
     } catch (ApiException e) {
-      System.err.println("Exception when calling StatisticsApi#calculateEventTypesForAllApps");
+      System.err.println("Exception when calling StatisticsApi#calculateEventTypesForApps");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -59,7 +59,7 @@ public class Example {
     try {
       ApiResponse<AggregateEventTypesOut> response = client
               .statistics
-              .calculateEventTypesForAllApps()
+              .calculateEventTypesForApps()
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -67,7 +67,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling StatisticsApi#calculateEventTypesForAllApps");
+      System.err.println("Exception when calling StatisticsApi#calculateEventTypesForApps");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -99,9 +99,9 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 | **202** |  |  -  |
 
-<a name="calculateMessageDestinations"></a>
-# **calculateMessageDestinations**
-> AppUsageStatsOut calculateMessageDestinations(appUsageStatsIn).idempotencyKey(idempotencyKey).execute();
+<a name="calculateMessageDestinationsForApps"></a>
+# **calculateMessageDestinationsForApps**
+> AppUsageStatsOut calculateMessageDestinationsForApps(appUsageStatsIn).idempotencyKey(idempotencyKey).execute();
 
 Aggregate App Stats
 
@@ -136,7 +136,7 @@ public class Example {
     try {
       AppUsageStatsOut result = client
               .statistics
-              .calculateMessageDestinations(since, until)
+              .calculateMessageDestinationsForApps(since, until)
               .appIds(appIds)
               .idempotencyKey(idempotencyKey)
               .execute();
@@ -145,7 +145,7 @@ public class Example {
       System.out.println(result.getStatus());
       System.out.println(result.getTask());
     } catch (ApiException e) {
-      System.err.println("Exception when calling StatisticsApi#calculateMessageDestinations");
+      System.err.println("Exception when calling StatisticsApi#calculateMessageDestinationsForApps");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -156,7 +156,7 @@ public class Example {
     try {
       ApiResponse<AppUsageStatsOut> response = client
               .statistics
-              .calculateMessageDestinations(since, until)
+              .calculateMessageDestinationsForApps(since, until)
               .appIds(appIds)
               .idempotencyKey(idempotencyKey)
               .executeWithHttpInfo();
@@ -166,7 +166,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling StatisticsApi#calculateMessageDestinations");
+      System.err.println("Exception when calling StatisticsApi#calculateMessageDestinationsForApps");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

@@ -9,7 +9,7 @@ All URIs are relative to *https://api.eu.svix.com*
 | [**listAll**](ApplicationApi.md#listAll) | **GET** /api/v1/app | List Applications |
 | [**partiallyUpdate**](ApplicationApi.md#partiallyUpdate) | **PATCH** /api/v1/app/{app_id} | Patch Application |
 | [**removeApp**](ApplicationApi.md#removeApp) | **DELETE** /api/v1/app/{app_id} | Delete Application |
-| [**updateApp**](ApplicationApi.md#updateApp) | **PUT** /api/v1/app/{app_id} | Update Application |
+| [**updateApplicationById**](ApplicationApi.md#updateApplicationById) | **PUT** /api/v1/app/{app_id} | Update Application |
 
 
 <a name="createNewApplication"></a>
@@ -532,9 +532,9 @@ null (empty response body)
 |-------------|-------------|------------------|
 | **204** | no content |  -  |
 
-<a name="updateApp"></a>
-# **updateApp**
-> ApplicationOut updateApp(appId, applicationIn).execute();
+<a name="updateApplicationById"></a>
+# **updateApplicationById**
+> ApplicationOut updateApplicationById(appId, applicationIn).execute();
 
 Update Application
 
@@ -570,7 +570,7 @@ public class Example {
     try {
       ApplicationOut result = client
               .application
-              .updateApp(name, appId)
+              .updateApplicationById(name, appId)
               .rateLimit(rateLimit)
               .uid(uid)
               .metadata(metadata)
@@ -584,7 +584,7 @@ public class Example {
       System.out.println(result.getUpdatedAt());
       System.out.println(result.getMetadata());
     } catch (ApiException e) {
-      System.err.println("Exception when calling ApplicationApi#updateApp");
+      System.err.println("Exception when calling ApplicationApi#updateApplicationById");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -595,7 +595,7 @@ public class Example {
     try {
       ApiResponse<ApplicationOut> response = client
               .application
-              .updateApp(name, appId)
+              .updateApplicationById(name, appId)
               .rateLimit(rateLimit)
               .uid(uid)
               .metadata(metadata)
@@ -606,7 +606,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling ApplicationApi#updateApp");
+      System.err.println("Exception when calling ApplicationApi#updateApplicationById");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

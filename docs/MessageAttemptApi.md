@@ -5,14 +5,14 @@ All URIs are relative to *https://api.eu.svix.com*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**deleteResponseBody**](MessageAttemptApi.md#deleteResponseBody) | **DELETE** /api/v1/app/{app_id}/msg/{msg_id}/attempt/{attempt_id}/content | Delete attempt response body |
-| [**getByDestination**](MessageAttemptApi.md#getByDestination) | **GET** /api/v1/app/{app_id}/msg/{msg_id}/attempt/{attempt_id} | Get Attempt |
+| [**getByAttempt**](MessageAttemptApi.md#getByAttempt) | **GET** /api/v1/app/{app_id}/msg/{msg_id}/attempt/{attempt_id} | Get Attempt |
 | [**listAttemptedDestinations**](MessageAttemptApi.md#listAttemptedDestinations) | **GET** /api/v1/app/{app_id}/msg/{msg_id}/endpoint | List Attempted Destinations |
 | [**listAttemptedMessages**](MessageAttemptApi.md#listAttemptedMessages) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id}/msg | List Attempted Messages |
 | [**listByEndpoint**](MessageAttemptApi.md#listByEndpoint) | **GET** /api/v1/app/{app_id}/attempt/endpoint/{endpoint_id} | List Attempts By Endpoint |
 | [**listByEndpointDeprecated**](MessageAttemptApi.md#listByEndpointDeprecated) | **GET** /api/v1/app/{app_id}/msg/{msg_id}/endpoint/{endpoint_id}/attempt | List Attempts For Endpoint |
-| [**listByMsgAttemptedDestinations**](MessageAttemptApi.md#listByMsgAttemptedDestinations) | **GET** /api/v1/app/{app_id}/attempt/msg/{msg_id} | List Attempts By Msg |
-| [**listByMsgAttemptedDestinations_0**](MessageAttemptApi.md#listByMsgAttemptedDestinations_0) | **GET** /api/v1/app/{app_id}/msg/{msg_id}/attempt | List Attempts |
-| [**resendMessageToEndpoint**](MessageAttemptApi.md#resendMessageToEndpoint) | **POST** /api/v1/app/{app_id}/msg/{msg_id}/endpoint/{endpoint_id}/resend | Resend Webhook |
+| [**listByMsg**](MessageAttemptApi.md#listByMsg) | **GET** /api/v1/app/{app_id}/attempt/msg/{msg_id} | List Attempts By Msg |
+| [**listByMsgAttempt**](MessageAttemptApi.md#listByMsgAttempt) | **GET** /api/v1/app/{app_id}/msg/{msg_id}/attempt | List Attempts |
+| [**resendWebhook**](MessageAttemptApi.md#resendWebhook) | **POST** /api/v1/app/{app_id}/msg/{msg_id}/endpoint/{endpoint_id}/resend | Resend Webhook |
 
 
 <a name="deleteResponseBody"></a>
@@ -105,9 +105,9 @@ null (empty response body)
 |-------------|-------------|------------------|
 | **204** | no content |  -  |
 
-<a name="getByDestination"></a>
-# **getByDestination**
-> MessageAttemptOut getByDestination(appId, msgId, attemptId).execute();
+<a name="getByAttempt"></a>
+# **getByAttempt**
+> MessageAttemptOut getByAttempt(appId, msgId, attemptId).execute();
 
 Get Attempt
 
@@ -141,7 +141,7 @@ public class Example {
     try {
       MessageAttemptOut result = client
               .messageAttempt
-              .getByDestination(appId, msgId, attemptId)
+              .getByAttempt(appId, msgId, attemptId)
               .execute();
       System.out.println(result);
       System.out.println(result.getUrl());
@@ -155,7 +155,7 @@ public class Example {
       System.out.println(result.getTimestamp());
       System.out.println(result.getMsg());
     } catch (ApiException e) {
-      System.err.println("Exception when calling MessageAttemptApi#getByDestination");
+      System.err.println("Exception when calling MessageAttemptApi#getByAttempt");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -166,7 +166,7 @@ public class Example {
     try {
       ApiResponse<MessageAttemptOut> response = client
               .messageAttempt
-              .getByDestination(appId, msgId, attemptId)
+              .getByAttempt(appId, msgId, attemptId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -174,7 +174,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling MessageAttemptApi#getByDestination");
+      System.err.println("Exception when calling MessageAttemptApi#getByAttempt");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -725,9 +725,9 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** |  |  -  |
 
-<a name="listByMsgAttemptedDestinations"></a>
-# **listByMsgAttemptedDestinations**
-> ListResponseMessageAttemptOut listByMsgAttemptedDestinations(appId, msgId).limit(limit).iterator(iterator).status(status).statusCodeClass(statusCodeClass).channel(channel).tag(tag).endpointId(endpointId).before(before).after(after).withContent(withContent).eventTypes(eventTypes).execute();
+<a name="listByMsg"></a>
+# **listByMsg**
+> ListResponseMessageAttemptOut listByMsg(appId, msgId).limit(limit).iterator(iterator).status(status).statusCodeClass(statusCodeClass).channel(channel).tag(tag).endpointId(endpointId).before(before).after(after).withContent(withContent).eventTypes(eventTypes).execute();
 
 List Attempts By Msg
 
@@ -771,7 +771,7 @@ public class Example {
     try {
       ListResponseMessageAttemptOut result = client
               .messageAttempt
-              .listByMsgAttemptedDestinations(appId, msgId)
+              .listByMsg(appId, msgId)
               .limit(limit)
               .iterator(iterator)
               .status(status)
@@ -790,7 +790,7 @@ public class Example {
       System.out.println(result.getPrevIterator());
       System.out.println(result.getDone());
     } catch (ApiException e) {
-      System.err.println("Exception when calling MessageAttemptApi#listByMsgAttemptedDestinations");
+      System.err.println("Exception when calling MessageAttemptApi#listByMsg");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -801,7 +801,7 @@ public class Example {
     try {
       ApiResponse<ListResponseMessageAttemptOut> response = client
               .messageAttempt
-              .listByMsgAttemptedDestinations(appId, msgId)
+              .listByMsg(appId, msgId)
               .limit(limit)
               .iterator(iterator)
               .status(status)
@@ -820,7 +820,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling MessageAttemptApi#listByMsgAttemptedDestinations");
+      System.err.println("Exception when calling MessageAttemptApi#listByMsg");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -867,9 +867,9 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** |  |  -  |
 
-<a name="listByMsgAttemptedDestinations_0"></a>
-# **listByMsgAttemptedDestinations_0**
-> ListResponseMessageAttemptOut listByMsgAttemptedDestinations_0(appId, msgId).limit(limit).iterator(iterator).endpointId(endpointId).channel(channel).tag(tag).status(status).before(before).after(after).statusCodeClass(statusCodeClass).eventTypes(eventTypes).execute();
+<a name="listByMsgAttempt"></a>
+# **listByMsgAttempt**
+> ListResponseMessageAttemptOut listByMsgAttempt(appId, msgId).limit(limit).iterator(iterator).endpointId(endpointId).channel(channel).tag(tag).status(status).before(before).after(after).statusCodeClass(statusCodeClass).eventTypes(eventTypes).execute();
 
 List Attempts
 
@@ -912,7 +912,7 @@ public class Example {
     try {
       ListResponseMessageAttemptOut result = client
               .messageAttempt
-              .listByMsgAttemptedDestinations_0(appId, msgId)
+              .listByMsgAttempt(appId, msgId)
               .limit(limit)
               .iterator(iterator)
               .endpointId(endpointId)
@@ -930,7 +930,7 @@ public class Example {
       System.out.println(result.getPrevIterator());
       System.out.println(result.getDone());
     } catch (ApiException e) {
-      System.err.println("Exception when calling MessageAttemptApi#listByMsgAttemptedDestinations_0");
+      System.err.println("Exception when calling MessageAttemptApi#listByMsgAttempt");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -941,7 +941,7 @@ public class Example {
     try {
       ApiResponse<ListResponseMessageAttemptOut> response = client
               .messageAttempt
-              .listByMsgAttemptedDestinations_0(appId, msgId)
+              .listByMsgAttempt(appId, msgId)
               .limit(limit)
               .iterator(iterator)
               .endpointId(endpointId)
@@ -959,7 +959,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling MessageAttemptApi#listByMsgAttemptedDestinations_0");
+      System.err.println("Exception when calling MessageAttemptApi#listByMsgAttempt");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -1005,9 +1005,9 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** |  |  -  |
 
-<a name="resendMessageToEndpoint"></a>
-# **resendMessageToEndpoint**
-> resendMessageToEndpoint(appId, msgId, endpointId).idempotencyKey(idempotencyKey).execute();
+<a name="resendWebhook"></a>
+# **resendWebhook**
+> resendWebhook(appId, msgId, endpointId).idempotencyKey(idempotencyKey).execute();
 
 Resend Webhook
 
@@ -1042,11 +1042,11 @@ public class Example {
     try {
       client
               .messageAttempt
-              .resendMessageToEndpoint(appId, msgId, endpointId)
+              .resendWebhook(appId, msgId, endpointId)
               .idempotencyKey(idempotencyKey)
               .execute();
     } catch (ApiException e) {
-      System.err.println("Exception when calling MessageAttemptApi#resendMessageToEndpoint");
+      System.err.println("Exception when calling MessageAttemptApi#resendWebhook");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -1057,11 +1057,11 @@ public class Example {
     try {
       client
               .messageAttempt
-              .resendMessageToEndpoint(appId, msgId, endpointId)
+              .resendWebhook(appId, msgId, endpointId)
               .idempotencyKey(idempotencyKey)
               .executeWithHttpInfo();
     } catch (ApiException e) {
-      System.err.println("Exception when calling MessageAttemptApi#resendMessageToEndpoint");
+      System.err.println("Exception when calling MessageAttemptApi#resendWebhook");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

@@ -8,9 +8,9 @@ All URIs are relative to *https://api.eu.svix.com*
 | [**deleteById**](IntegrationApi.md#deleteById) | **DELETE** /api/v1/app/{app_id}/integration/{integ_id} | Delete Integration |
 | [**getById**](IntegrationApi.md#getById) | **GET** /api/v1/app/{app_id}/integration/{integ_id} | Get Integration |
 | [**getKey**](IntegrationApi.md#getKey) | **GET** /api/v1/app/{app_id}/integration/{integ_id}/key | Get Integration Key |
-| [**listIntegrations**](IntegrationApi.md#listIntegrations) | **GET** /api/v1/app/{app_id}/integration | List Integrations |
-| [**rotateIntegrationKey**](IntegrationApi.md#rotateIntegrationKey) | **POST** /api/v1/app/{app_id}/integration/{integ_id}/key/rotate | Rotate Integration Key |
-| [**updateIntegration**](IntegrationApi.md#updateIntegration) | **PUT** /api/v1/app/{app_id}/integration/{integ_id} | Update Integration |
+| [**list**](IntegrationApi.md#list) | **GET** /api/v1/app/{app_id}/integration | List Integrations |
+| [**rotateKey**](IntegrationApi.md#rotateKey) | **POST** /api/v1/app/{app_id}/integration/{integ_id}/key/rotate | Rotate Integration Key |
+| [**updateIntegrationById**](IntegrationApi.md#updateIntegrationById) | **PUT** /api/v1/app/{app_id}/integration/{integ_id} | Update Integration |
 
 
 <a name="createNewIntegration"></a>
@@ -396,9 +396,9 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** |  |  -  |
 
-<a name="listIntegrations"></a>
-# **listIntegrations**
-> ListResponseIntegrationOut listIntegrations(appId).limit(limit).iterator(iterator).execute();
+<a name="list"></a>
+# **list**
+> ListResponseIntegrationOut list(appId).limit(limit).iterator(iterator).execute();
 
 List Integrations
 
@@ -432,7 +432,7 @@ public class Example {
     try {
       ListResponseIntegrationOut result = client
               .integration
-              .listIntegrations(appId)
+              .list(appId)
               .limit(limit)
               .iterator(iterator)
               .execute();
@@ -442,7 +442,7 @@ public class Example {
       System.out.println(result.getPrevIterator());
       System.out.println(result.getDone());
     } catch (ApiException e) {
-      System.err.println("Exception when calling IntegrationApi#listIntegrations");
+      System.err.println("Exception when calling IntegrationApi#list");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -453,7 +453,7 @@ public class Example {
     try {
       ApiResponse<ListResponseIntegrationOut> response = client
               .integration
-              .listIntegrations(appId)
+              .list(appId)
               .limit(limit)
               .iterator(iterator)
               .executeWithHttpInfo();
@@ -463,7 +463,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling IntegrationApi#listIntegrations");
+      System.err.println("Exception when calling IntegrationApi#list");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -500,9 +500,9 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** |  |  -  |
 
-<a name="rotateIntegrationKey"></a>
-# **rotateIntegrationKey**
-> IntegrationKeyOut rotateIntegrationKey(appId, integId).idempotencyKey(idempotencyKey).execute();
+<a name="rotateKey"></a>
+# **rotateKey**
+> IntegrationKeyOut rotateKey(appId, integId).idempotencyKey(idempotencyKey).execute();
 
 Rotate Integration Key
 
@@ -536,13 +536,13 @@ public class Example {
     try {
       IntegrationKeyOut result = client
               .integration
-              .rotateIntegrationKey(appId, integId)
+              .rotateKey(appId, integId)
               .idempotencyKey(idempotencyKey)
               .execute();
       System.out.println(result);
       System.out.println(result.getKey());
     } catch (ApiException e) {
-      System.err.println("Exception when calling IntegrationApi#rotateIntegrationKey");
+      System.err.println("Exception when calling IntegrationApi#rotateKey");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -553,7 +553,7 @@ public class Example {
     try {
       ApiResponse<IntegrationKeyOut> response = client
               .integration
-              .rotateIntegrationKey(appId, integId)
+              .rotateKey(appId, integId)
               .idempotencyKey(idempotencyKey)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -562,7 +562,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling IntegrationApi#rotateIntegrationKey");
+      System.err.println("Exception when calling IntegrationApi#rotateKey");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -599,9 +599,9 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** |  |  -  |
 
-<a name="updateIntegration"></a>
-# **updateIntegration**
-> IntegrationOut updateIntegration(appId, integId, integrationUpdate).execute();
+<a name="updateIntegrationById"></a>
+# **updateIntegrationById**
+> IntegrationOut updateIntegrationById(appId, integId, integrationUpdate).execute();
 
 Update Integration
 
@@ -635,7 +635,7 @@ public class Example {
     try {
       IntegrationOut result = client
               .integration
-              .updateIntegration(name, appId, integId)
+              .updateIntegrationById(name, appId, integId)
               .execute();
       System.out.println(result);
       System.out.println(result.getName());
@@ -643,7 +643,7 @@ public class Example {
       System.out.println(result.getCreatedAt());
       System.out.println(result.getUpdatedAt());
     } catch (ApiException e) {
-      System.err.println("Exception when calling IntegrationApi#updateIntegration");
+      System.err.println("Exception when calling IntegrationApi#updateIntegrationById");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -654,7 +654,7 @@ public class Example {
     try {
       ApiResponse<IntegrationOut> response = client
               .integration
-              .updateIntegration(name, appId, integId)
+              .updateIntegrationById(name, appId, integId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -662,7 +662,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling IntegrationApi#updateIntegration");
+      System.err.println("Exception when calling IntegrationApi#updateIntegrationById");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

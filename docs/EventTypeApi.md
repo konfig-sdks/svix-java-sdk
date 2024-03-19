@@ -4,18 +4,18 @@ All URIs are relative to *https://api.eu.svix.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**archiveType**](EventTypeApi.md#archiveType) | **DELETE** /api/v1/event-type/{event_type_name} | Delete Event Type |
+| [**archive**](EventTypeApi.md#archive) | **DELETE** /api/v1/event-type/{event_type_name} | Delete Event Type |
 | [**createOrUpdate**](EventTypeApi.md#createOrUpdate) | **POST** /api/v1/event-type | Create Event Type |
-| [**getByName**](EventTypeApi.md#getByName) | **GET** /api/v1/event-type/{event_type_name} | Get Event Type |
-| [**getList**](EventTypeApi.md#getList) | **GET** /api/v1/event-type | List Event Types |
+| [**getEventType**](EventTypeApi.md#getEventType) | **GET** /api/v1/event-type/{event_type_name} | Get Event Type |
 | [**importFromOpenapi**](EventTypeApi.md#importFromOpenapi) | **POST** /api/v1/event-type/import/openapi | Event Type Import From Openapi |
-| [**partiallyUpdateType**](EventTypeApi.md#partiallyUpdateType) | **PATCH** /api/v1/event-type/{event_type_name} | Patch Event Type |
-| [**updateType**](EventTypeApi.md#updateType) | **PUT** /api/v1/event-type/{event_type_name} | Update Event Type |
+| [**list**](EventTypeApi.md#list) | **GET** /api/v1/event-type | List Event Types |
+| [**partiallyUpdateEventType**](EventTypeApi.md#partiallyUpdateEventType) | **PATCH** /api/v1/event-type/{event_type_name} | Patch Event Type |
+| [**updateEventTypeName**](EventTypeApi.md#updateEventTypeName) | **PUT** /api/v1/event-type/{event_type_name} | Update Event Type |
 
 
-<a name="archiveType"></a>
-# **archiveType**
-> archiveType(eventTypeName).expunge(expunge).execute();
+<a name="archive"></a>
+# **archive**
+> archive(eventTypeName).expunge(expunge).execute();
 
 Delete Event Type
 
@@ -48,11 +48,11 @@ public class Example {
     try {
       client
               .eventType
-              .archiveType(eventTypeName)
+              .archive(eventTypeName)
               .expunge(expunge)
               .execute();
     } catch (ApiException e) {
-      System.err.println("Exception when calling EventTypeApi#archiveType");
+      System.err.println("Exception when calling EventTypeApi#archive");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -63,11 +63,11 @@ public class Example {
     try {
       client
               .eventType
-              .archiveType(eventTypeName)
+              .archive(eventTypeName)
               .expunge(expunge)
               .executeWithHttpInfo();
     } catch (ApiException e) {
-      System.err.println("Exception when calling EventTypeApi#archiveType");
+      System.err.println("Exception when calling EventTypeApi#archive");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -216,9 +216,9 @@ public class Example {
 |-------------|-------------|------------------|
 | **201** |  |  -  |
 
-<a name="getByName"></a>
-# **getByName**
-> EventTypeOut getByName(eventTypeName).execute();
+<a name="getEventType"></a>
+# **getEventType**
+> EventTypeOut getEventType(eventTypeName).execute();
 
 Get Event Type
 
@@ -250,7 +250,7 @@ public class Example {
     try {
       EventTypeOut result = client
               .eventType
-              .getByName(eventTypeName)
+              .getEventType(eventTypeName)
               .execute();
       System.out.println(result);
       System.out.println(result.getDescription());
@@ -261,7 +261,7 @@ public class Example {
       System.out.println(result.getUpdatedAt());
       System.out.println(result.getFeatureFlag());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EventTypeApi#getByName");
+      System.err.println("Exception when calling EventTypeApi#getEventType");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -272,7 +272,7 @@ public class Example {
     try {
       ApiResponse<EventTypeOut> response = client
               .eventType
-              .getByName(eventTypeName)
+              .getEventType(eventTypeName)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -280,7 +280,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EventTypeApi#getByName");
+      System.err.println("Exception when calling EventTypeApi#getEventType");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -300,120 +300,6 @@ public class Example {
 ### Return type
 
 [**EventTypeOut**](EventTypeOut.md)
-
-### Authorization
-
-[HTTPBearer](../README.md#HTTPBearer)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** |  |  -  |
-
-<a name="getList"></a>
-# **getList**
-> ListResponseEventTypeOut getList().limit(limit).iterator(iterator).order(order).includeArchived(includeArchived).withContent(withContent).execute();
-
-List Event Types
-
-Return the list of event types.
-
-### Example
-```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Svix;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.EventTypeApi;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-public class Example {
-  public static void main(String[] args) {
-    Configuration configuration = new Configuration();
-    configuration.host = "https://api.eu.svix.com";
-    
-    // Configure HTTP bearer authorization: HTTPBearer
-    configuration.token = "BEARER TOKEN";
-    Svix client = new Svix(configuration);
-    Integer limit = 56; // Limit the number of returned items
-    String iterator = "user.signup"; // The iterator returned from a prior invocation
-    Ordering order = Ordering.fromValue("ascending"); // The sorting order of the returned items
-    Boolean includeArchived = false; // When `true` archived (deleted but not expunged) items are included in the response
-    Boolean withContent = false; // When `true` the full item (including the schema) is included in the response
-    try {
-      ListResponseEventTypeOut result = client
-              .eventType
-              .getList()
-              .limit(limit)
-              .iterator(iterator)
-              .order(order)
-              .includeArchived(includeArchived)
-              .withContent(withContent)
-              .execute();
-      System.out.println(result);
-      System.out.println(result.getData());
-      System.out.println(result.getIterator());
-      System.out.println(result.getPrevIterator());
-      System.out.println(result.getDone());
-    } catch (ApiException e) {
-      System.err.println("Exception when calling EventTypeApi#getList");
-      System.err.println("Status code: " + e.getStatusCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
-    try {
-      ApiResponse<ListResponseEventTypeOut> response = client
-              .eventType
-              .getList()
-              .limit(limit)
-              .iterator(iterator)
-              .order(order)
-              .includeArchived(includeArchived)
-              .withContent(withContent)
-              .executeWithHttpInfo();
-      System.out.println(response.getResponseBody());
-      System.out.println(response.getResponseHeaders());
-      System.out.println(response.getStatusCode());
-      System.out.println(response.getRoundTripTime());
-      System.out.println(response.getRequest());
-    } catch (ApiException e) {
-      System.err.println("Exception when calling EventTypeApi#getList");
-      System.err.println("Status code: " + e.getStatusCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **limit** | **Integer**| Limit the number of returned items | [optional] |
-| **iterator** | **String**| The iterator returned from a prior invocation | [optional] |
-| **order** | [**Ordering**](.md)| The sorting order of the returned items | [optional] [enum: ascending, descending] |
-| **includeArchived** | **Boolean**| When &#x60;true&#x60; archived (deleted but not expunged) items are included in the response | [optional] [default to false] |
-| **withContent** | **Boolean**| When &#x60;true&#x60; the full item (including the schema) is included in the response | [optional] [default to false] |
-
-### Return type
-
-[**ListResponseEventTypeOut**](ListResponseEventTypeOut.md)
 
 ### Authorization
 
@@ -531,9 +417,123 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** |  |  -  |
 
-<a name="partiallyUpdateType"></a>
-# **partiallyUpdateType**
-> EventTypeOut partiallyUpdateType(eventTypeName, eventTypePatch).execute();
+<a name="list"></a>
+# **list**
+> ListResponseEventTypeOut list().limit(limit).iterator(iterator).order(order).includeArchived(includeArchived).withContent(withContent).execute();
+
+List Event Types
+
+Return the list of event types.
+
+### Example
+```java
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Svix;
+import com.konfigthis.client.Configuration;
+import com.konfigthis.client.auth.*;
+import com.konfigthis.client.model.*;
+import com.konfigthis.client.api.EventTypeApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.eu.svix.com";
+    
+    // Configure HTTP bearer authorization: HTTPBearer
+    configuration.token = "BEARER TOKEN";
+    Svix client = new Svix(configuration);
+    Integer limit = 56; // Limit the number of returned items
+    String iterator = "user.signup"; // The iterator returned from a prior invocation
+    Ordering order = Ordering.fromValue("ascending"); // The sorting order of the returned items
+    Boolean includeArchived = false; // When `true` archived (deleted but not expunged) items are included in the response
+    Boolean withContent = false; // When `true` the full item (including the schema) is included in the response
+    try {
+      ListResponseEventTypeOut result = client
+              .eventType
+              .list()
+              .limit(limit)
+              .iterator(iterator)
+              .order(order)
+              .includeArchived(includeArchived)
+              .withContent(withContent)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getData());
+      System.out.println(result.getIterator());
+      System.out.println(result.getPrevIterator());
+      System.out.println(result.getDone());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling EventTypeApi#list");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<ListResponseEventTypeOut> response = client
+              .eventType
+              .list()
+              .limit(limit)
+              .iterator(iterator)
+              .order(order)
+              .includeArchived(includeArchived)
+              .withContent(withContent)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling EventTypeApi#list");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **limit** | **Integer**| Limit the number of returned items | [optional] |
+| **iterator** | **String**| The iterator returned from a prior invocation | [optional] |
+| **order** | [**Ordering**](.md)| The sorting order of the returned items | [optional] [enum: ascending, descending] |
+| **includeArchived** | **Boolean**| When &#x60;true&#x60; archived (deleted but not expunged) items are included in the response | [optional] [default to false] |
+| **withContent** | **Boolean**| When &#x60;true&#x60; the full item (including the schema) is included in the response | [optional] [default to false] |
+
+### Return type
+
+[**ListResponseEventTypeOut**](ListResponseEventTypeOut.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** |  |  -  |
+
+<a name="partiallyUpdateEventType"></a>
+# **partiallyUpdateEventType**
+> EventTypeOut partiallyUpdateEventType(eventTypeName, eventTypePatch).execute();
 
 Patch Event Type
 
@@ -569,7 +569,7 @@ public class Example {
     try {
       EventTypeOut result = client
               .eventType
-              .partiallyUpdateType(eventTypeName)
+              .partiallyUpdateEventType(eventTypeName)
               .description(description)
               .archived(archived)
               .schemas(schemas)
@@ -584,7 +584,7 @@ public class Example {
       System.out.println(result.getUpdatedAt());
       System.out.println(result.getFeatureFlag());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EventTypeApi#partiallyUpdateType");
+      System.err.println("Exception when calling EventTypeApi#partiallyUpdateEventType");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -595,7 +595,7 @@ public class Example {
     try {
       ApiResponse<EventTypeOut> response = client
               .eventType
-              .partiallyUpdateType(eventTypeName)
+              .partiallyUpdateEventType(eventTypeName)
               .description(description)
               .archived(archived)
               .schemas(schemas)
@@ -607,7 +607,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EventTypeApi#partiallyUpdateType");
+      System.err.println("Exception when calling EventTypeApi#partiallyUpdateEventType");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -643,9 +643,9 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** |  |  -  |
 
-<a name="updateType"></a>
-# **updateType**
-> EventTypeOut updateType(eventTypeName, eventTypeUpdate).execute();
+<a name="updateEventTypeName"></a>
+# **updateEventTypeName**
+> EventTypeOut updateEventTypeName(eventTypeName, eventTypeUpdate).execute();
 
 Update Event Type
 
@@ -681,7 +681,7 @@ public class Example {
     try {
       EventTypeOut result = client
               .eventType
-              .updateType(description, eventTypeName)
+              .updateEventTypeName(description, eventTypeName)
               .archived(archived)
               .schemas(schemas)
               .featureFlag(featureFlag)
@@ -695,7 +695,7 @@ public class Example {
       System.out.println(result.getUpdatedAt());
       System.out.println(result.getFeatureFlag());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EventTypeApi#updateType");
+      System.err.println("Exception when calling EventTypeApi#updateEventTypeName");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -706,7 +706,7 @@ public class Example {
     try {
       ApiResponse<EventTypeOut> response = client
               .eventType
-              .updateType(description, eventTypeName)
+              .updateEventTypeName(description, eventTypeName)
               .archived(archived)
               .schemas(schemas)
               .featureFlag(featureFlag)
@@ -717,7 +717,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EventTypeApi#updateType");
+      System.err.println("Exception when calling EventTypeApi#updateEventTypeName");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

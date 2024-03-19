@@ -4,28 +4,28 @@ All URIs are relative to *https://api.eu.svix.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createNew**](EndpointApi.md#createNew) | **POST** /api/v1/app/{app_id}/endpoint | Create Endpoint |
-| [**getEndpoint**](EndpointApi.md#getEndpoint) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id} | Get Endpoint |
+| [**createOrUpdate**](EndpointApi.md#createOrUpdate) | **POST** /api/v1/app/{app_id}/endpoint | Create Endpoint |
+| [**getDetails**](EndpointApi.md#getDetails) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id} | Get Endpoint |
 | [**getHeaders**](EndpointApi.md#getHeaders) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id}/headers | Get Endpoint Headers |
-| [**getSecret**](EndpointApi.md#getSecret) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id}/secret | Get Endpoint Secret |
-| [**getStats**](EndpointApi.md#getStats) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id}/stats | Endpoint Stats |
+| [**getSigningSecret**](EndpointApi.md#getSigningSecret) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id}/secret | Get Endpoint Secret |
+| [**getStatistics**](EndpointApi.md#getStatistics) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id}/stats | Endpoint Stats |
 | [**getTransformationCode**](EndpointApi.md#getTransformationCode) | **GET** /api/v1/app/{app_id}/endpoint/{endpoint_id}/transformation | Get Endpoint Transformation |
 | [**listEndpoints**](EndpointApi.md#listEndpoints) | **GET** /api/v1/app/{app_id}/endpoint | List Endpoints |
 | [**partiallySetHeaders**](EndpointApi.md#partiallySetHeaders) | **PATCH** /api/v1/app/{app_id}/endpoint/{endpoint_id}/headers | Patch Endpoint Headers |
 | [**partiallyUpdate**](EndpointApi.md#partiallyUpdate) | **PATCH** /api/v1/app/{app_id}/endpoint/{endpoint_id} | Patch Endpoint |
 | [**remove**](EndpointApi.md#remove) | **DELETE** /api/v1/app/{app_id}/endpoint/{endpoint_id} | Delete Endpoint |
 | [**replayMissingWebhooks**](EndpointApi.md#replayMissingWebhooks) | **POST** /api/v1/app/{app_id}/endpoint/{endpoint_id}/replay-missing | Replay Missing Webhooks |
-| [**resendFailedWebhooks**](EndpointApi.md#resendFailedWebhooks) | **POST** /api/v1/app/{app_id}/endpoint/{endpoint_id}/recover | Recover Failed Webhooks |
+| [**resendFailedMessages**](EndpointApi.md#resendFailedMessages) | **POST** /api/v1/app/{app_id}/endpoint/{endpoint_id}/recover | Recover Failed Webhooks |
 | [**rotateSecret**](EndpointApi.md#rotateSecret) | **POST** /api/v1/app/{app_id}/endpoint/{endpoint_id}/secret/rotate | Rotate Endpoint Secret |
-| [**sendExampleMessage**](EndpointApi.md#sendExampleMessage) | **POST** /api/v1/app/{app_id}/endpoint/{endpoint_id}/send-example | Send Event Type Example Message |
+| [**sendExampleMessageType**](EndpointApi.md#sendExampleMessageType) | **POST** /api/v1/app/{app_id}/endpoint/{endpoint_id}/send-example | Send Event Type Example Message |
 | [**setTransformationCode**](EndpointApi.md#setTransformationCode) | **PATCH** /api/v1/app/{app_id}/endpoint/{endpoint_id}/transformation | Set Endpoint Transformation |
-| [**updateEndpoint**](EndpointApi.md#updateEndpoint) | **PUT** /api/v1/app/{app_id}/endpoint/{endpoint_id} | Update Endpoint |
-| [**updateHeaders**](EndpointApi.md#updateHeaders) | **PUT** /api/v1/app/{app_id}/endpoint/{endpoint_id}/headers | Update Endpoint Headers |
+| [**setWebhookHeaders**](EndpointApi.md#setWebhookHeaders) | **PUT** /api/v1/app/{app_id}/endpoint/{endpoint_id}/headers | Update Endpoint Headers |
+| [**updateEndpointById**](EndpointApi.md#updateEndpointById) | **PUT** /api/v1/app/{app_id}/endpoint/{endpoint_id} | Update Endpoint |
 
 
-<a name="createNew"></a>
-# **createNew**
-> EndpointOut createNew(appId, endpointIn).idempotencyKey(idempotencyKey).execute();
+<a name="createOrUpdate"></a>
+# **createOrUpdate**
+> EndpointOut createOrUpdate(appId, endpointIn).idempotencyKey(idempotencyKey).execute();
 
 Create Endpoint
 
@@ -68,7 +68,7 @@ public class Example {
     try {
       EndpointOut result = client
               .endpoint
-              .createNew(url, appId)
+              .createOrUpdate(url, appId)
               .description(description)
               .version(version)
               .rateLimit(rateLimit)
@@ -94,7 +94,7 @@ public class Example {
       System.out.println(result.getCreatedAt());
       System.out.println(result.getUpdatedAt());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EndpointApi#createNew");
+      System.err.println("Exception when calling EndpointApi#createOrUpdate");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -105,7 +105,7 @@ public class Example {
     try {
       ApiResponse<EndpointOut> response = client
               .endpoint
-              .createNew(url, appId)
+              .createOrUpdate(url, appId)
               .description(description)
               .version(version)
               .rateLimit(rateLimit)
@@ -123,7 +123,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EndpointApi#createNew");
+      System.err.println("Exception when calling EndpointApi#createOrUpdate");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -160,9 +160,9 @@ public class Example {
 |-------------|-------------|------------------|
 | **201** |  |  -  |
 
-<a name="getEndpoint"></a>
-# **getEndpoint**
-> EndpointOut getEndpoint(appId, endpointId).execute();
+<a name="getDetails"></a>
+# **getDetails**
+> EndpointOut getDetails(appId, endpointId).execute();
 
 Get Endpoint
 
@@ -195,7 +195,7 @@ public class Example {
     try {
       EndpointOut result = client
               .endpoint
-              .getEndpoint(appId, endpointId)
+              .getDetails(appId, endpointId)
               .execute();
       System.out.println(result);
       System.out.println(result.getDescription());
@@ -211,7 +211,7 @@ public class Example {
       System.out.println(result.getCreatedAt());
       System.out.println(result.getUpdatedAt());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EndpointApi#getEndpoint");
+      System.err.println("Exception when calling EndpointApi#getDetails");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -222,7 +222,7 @@ public class Example {
     try {
       ApiResponse<EndpointOut> response = client
               .endpoint
-              .getEndpoint(appId, endpointId)
+              .getDetails(appId, endpointId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -230,7 +230,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EndpointApi#getEndpoint");
+      System.err.println("Exception when calling EndpointApi#getDetails");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -362,9 +362,9 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** |  |  -  |
 
-<a name="getSecret"></a>
-# **getSecret**
-> EndpointSecretOut getSecret(appId, endpointId).execute();
+<a name="getSigningSecret"></a>
+# **getSigningSecret**
+> EndpointSecretOut getSigningSecret(appId, endpointId).execute();
 
 Get Endpoint Secret
 
@@ -397,12 +397,12 @@ public class Example {
     try {
       EndpointSecretOut result = client
               .endpoint
-              .getSecret(appId, endpointId)
+              .getSigningSecret(appId, endpointId)
               .execute();
       System.out.println(result);
       System.out.println(result.getKey());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EndpointApi#getSecret");
+      System.err.println("Exception when calling EndpointApi#getSigningSecret");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -413,7 +413,7 @@ public class Example {
     try {
       ApiResponse<EndpointSecretOut> response = client
               .endpoint
-              .getSecret(appId, endpointId)
+              .getSigningSecret(appId, endpointId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -421,7 +421,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EndpointApi#getSecret");
+      System.err.println("Exception when calling EndpointApi#getSigningSecret");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -457,9 +457,9 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** |  |  -  |
 
-<a name="getStats"></a>
-# **getStats**
-> EndpointStats getStats(appId, endpointId).since(since).until(until).execute();
+<a name="getStatistics"></a>
+# **getStatistics**
+> EndpointStats getStatistics(appId, endpointId).since(since).until(until).execute();
 
 Endpoint Stats
 
@@ -494,7 +494,7 @@ public class Example {
     try {
       EndpointStats result = client
               .endpoint
-              .getStats(appId, endpointId)
+              .getStatistics(appId, endpointId)
               .since(since)
               .until(until)
               .execute();
@@ -504,7 +504,7 @@ public class Example {
       System.out.println(result.getSending());
       System.out.println(result.getFail());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EndpointApi#getStats");
+      System.err.println("Exception when calling EndpointApi#getStatistics");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -515,7 +515,7 @@ public class Example {
     try {
       ApiResponse<EndpointStats> response = client
               .endpoint
-              .getStats(appId, endpointId)
+              .getStatistics(appId, endpointId)
               .since(since)
               .until(until)
               .executeWithHttpInfo();
@@ -525,7 +525,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EndpointApi#getStats");
+      System.err.println("Exception when calling EndpointApi#getStatistics");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -1188,9 +1188,9 @@ public class Example {
 |-------------|-------------|------------------|
 | **202** |  |  -  |
 
-<a name="resendFailedWebhooks"></a>
-# **resendFailedWebhooks**
-> RecoverOut resendFailedWebhooks(appId, endpointId, recoverIn).idempotencyKey(idempotencyKey).execute();
+<a name="resendFailedMessages"></a>
+# **resendFailedMessages**
+> RecoverOut resendFailedMessages(appId, endpointId, recoverIn).idempotencyKey(idempotencyKey).execute();
 
 Recover Failed Webhooks
 
@@ -1226,7 +1226,7 @@ public class Example {
     try {
       RecoverOut result = client
               .endpoint
-              .resendFailedWebhooks(since, appId, endpointId)
+              .resendFailedMessages(since, appId, endpointId)
               .until(until)
               .idempotencyKey(idempotencyKey)
               .execute();
@@ -1235,7 +1235,7 @@ public class Example {
       System.out.println(result.getStatus());
       System.out.println(result.getTask());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EndpointApi#resendFailedWebhooks");
+      System.err.println("Exception when calling EndpointApi#resendFailedMessages");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -1246,7 +1246,7 @@ public class Example {
     try {
       ApiResponse<RecoverOut> response = client
               .endpoint
-              .resendFailedWebhooks(since, appId, endpointId)
+              .resendFailedMessages(since, appId, endpointId)
               .until(until)
               .idempotencyKey(idempotencyKey)
               .executeWithHttpInfo();
@@ -1256,7 +1256,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EndpointApi#resendFailedWebhooks");
+      System.err.println("Exception when calling EndpointApi#resendFailedMessages");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -1390,9 +1390,9 @@ null (empty response body)
 |-------------|-------------|------------------|
 | **204** | no content |  -  |
 
-<a name="sendExampleMessage"></a>
-# **sendExampleMessage**
-> MessageOut sendExampleMessage(appId, endpointId, eventExampleIn).idempotencyKey(idempotencyKey).execute();
+<a name="sendExampleMessageType"></a>
+# **sendExampleMessageType**
+> MessageOut sendExampleMessageType(appId, endpointId, eventExampleIn).idempotencyKey(idempotencyKey).execute();
 
 Send Event Type Example Message
 
@@ -1427,7 +1427,7 @@ public class Example {
     try {
       MessageOut result = client
               .endpoint
-              .sendExampleMessage(eventType, appId, endpointId)
+              .sendExampleMessageType(eventType, appId, endpointId)
               .idempotencyKey(idempotencyKey)
               .execute();
       System.out.println(result);
@@ -1439,7 +1439,7 @@ public class Example {
       System.out.println(result.getId());
       System.out.println(result.getTimestamp());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EndpointApi#sendExampleMessage");
+      System.err.println("Exception when calling EndpointApi#sendExampleMessageType");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -1450,7 +1450,7 @@ public class Example {
     try {
       ApiResponse<MessageOut> response = client
               .endpoint
-              .sendExampleMessage(eventType, appId, endpointId)
+              .sendExampleMessageType(eventType, appId, endpointId)
               .idempotencyKey(idempotencyKey)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -1459,7 +1459,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EndpointApi#sendExampleMessage");
+      System.err.println("Exception when calling EndpointApi#sendExampleMessageType");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -1592,9 +1592,99 @@ null (empty response body)
 |-------------|-------------|------------------|
 | **204** | no content |  -  |
 
-<a name="updateEndpoint"></a>
-# **updateEndpoint**
-> EndpointOut updateEndpoint(appId, endpointId, endpointUpdate).execute();
+<a name="setWebhookHeaders"></a>
+# **setWebhookHeaders**
+> setWebhookHeaders(appId, endpointId, endpointHeadersIn).execute();
+
+Update Endpoint Headers
+
+Set the additional headers to be sent with the webhook
+
+### Example
+```java
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Svix;
+import com.konfigthis.client.Configuration;
+import com.konfigthis.client.auth.*;
+import com.konfigthis.client.model.*;
+import com.konfigthis.client.api.EndpointApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.eu.svix.com";
+    
+    // Configure HTTP bearer authorization: HTTPBearer
+    configuration.token = "BEARER TOKEN";
+    Svix client = new Svix(configuration);
+    Map<String, String> headers = new HashMap();
+    String appId = "unique-app-identifier"; // The app's ID or UID
+    String endpointId = "unique-ep-identifier"; // The ep's ID or UID
+    try {
+      client
+              .endpoint
+              .setWebhookHeaders(headers, appId, endpointId)
+              .execute();
+    } catch (ApiException e) {
+      System.err.println("Exception when calling EndpointApi#setWebhookHeaders");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      client
+              .endpoint
+              .setWebhookHeaders(headers, appId, endpointId)
+              .executeWithHttpInfo();
+    } catch (ApiException e) {
+      System.err.println("Exception when calling EndpointApi#setWebhookHeaders");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **appId** | **String**| The app&#39;s ID or UID | |
+| **endpointId** | **String**| The ep&#39;s ID or UID | |
+| **endpointHeadersIn** | [**EndpointHeadersIn**](EndpointHeadersIn.md)|  | |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | no content |  -  |
+
+<a name="updateEndpointById"></a>
+# **updateEndpointById**
+> EndpointOut updateEndpointById(appId, endpointId, endpointUpdate).execute();
 
 Update Endpoint
 
@@ -1636,7 +1726,7 @@ public class Example {
     try {
       EndpointOut result = client
               .endpoint
-              .updateEndpoint(url, appId, endpointId)
+              .updateEndpointById(url, appId, endpointId)
               .description(description)
               .version(version)
               .rateLimit(rateLimit)
@@ -1660,7 +1750,7 @@ public class Example {
       System.out.println(result.getCreatedAt());
       System.out.println(result.getUpdatedAt());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EndpointApi#updateEndpoint");
+      System.err.println("Exception when calling EndpointApi#updateEndpointById");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -1671,7 +1761,7 @@ public class Example {
     try {
       ApiResponse<EndpointOut> response = client
               .endpoint
-              .updateEndpoint(url, appId, endpointId)
+              .updateEndpointById(url, appId, endpointId)
               .description(description)
               .version(version)
               .rateLimit(rateLimit)
@@ -1687,7 +1777,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling EndpointApi#updateEndpoint");
+      System.err.println("Exception when calling EndpointApi#updateEndpointById");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -1724,94 +1814,4 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** |  |  -  |
 | **201** |  |  -  |
-
-<a name="updateHeaders"></a>
-# **updateHeaders**
-> updateHeaders(appId, endpointId, endpointHeadersIn).execute();
-
-Update Endpoint Headers
-
-Set the additional headers to be sent with the webhook
-
-### Example
-```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Svix;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.EndpointApi;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-public class Example {
-  public static void main(String[] args) {
-    Configuration configuration = new Configuration();
-    configuration.host = "https://api.eu.svix.com";
-    
-    // Configure HTTP bearer authorization: HTTPBearer
-    configuration.token = "BEARER TOKEN";
-    Svix client = new Svix(configuration);
-    Map<String, String> headers = new HashMap();
-    String appId = "unique-app-identifier"; // The app's ID or UID
-    String endpointId = "unique-ep-identifier"; // The ep's ID or UID
-    try {
-      client
-              .endpoint
-              .updateHeaders(headers, appId, endpointId)
-              .execute();
-    } catch (ApiException e) {
-      System.err.println("Exception when calling EndpointApi#updateHeaders");
-      System.err.println("Status code: " + e.getStatusCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
-    try {
-      client
-              .endpoint
-              .updateHeaders(headers, appId, endpointId)
-              .executeWithHttpInfo();
-    } catch (ApiException e) {
-      System.err.println("Exception when calling EndpointApi#updateHeaders");
-      System.err.println("Status code: " + e.getStatusCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **appId** | **String**| The app&#39;s ID or UID | |
-| **endpointId** | **String**| The ep&#39;s ID or UID | |
-| **endpointHeadersIn** | [**EndpointHeadersIn**](EndpointHeadersIn.md)|  | |
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[HTTPBearer](../README.md#HTTPBearer)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | no content |  -  |
 

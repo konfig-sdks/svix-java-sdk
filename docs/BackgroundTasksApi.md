@@ -4,13 +4,13 @@ All URIs are relative to *https://api.eu.svix.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getTaskById**](BackgroundTasksApi.md#getTaskById) | **GET** /api/v1/background-task/{task_id} | Get Background Task |
-| [**listRecentTasks**](BackgroundTasksApi.md#listRecentTasks) | **GET** /api/v1/background-task | List Background Tasks |
+| [**getById**](BackgroundTasksApi.md#getById) | **GET** /api/v1/background-task/{task_id} | Get Background Task |
+| [**getPastTasks**](BackgroundTasksApi.md#getPastTasks) | **GET** /api/v1/background-task | List Background Tasks |
 
 
-<a name="getTaskById"></a>
-# **getTaskById**
-> BackgroundTaskOut getTaskById(taskId).execute();
+<a name="getById"></a>
+# **getById**
+> BackgroundTaskOut getById(taskId).execute();
 
 Get Background Task
 
@@ -42,7 +42,7 @@ public class Example {
     try {
       BackgroundTaskOut result = client
               .backgroundTasks
-              .getTaskById(taskId)
+              .getById(taskId)
               .execute();
       System.out.println(result);
       System.out.println(result.getData());
@@ -50,7 +50,7 @@ public class Example {
       System.out.println(result.getStatus());
       System.out.println(result.getTask());
     } catch (ApiException e) {
-      System.err.println("Exception when calling BackgroundTasksApi#getTaskById");
+      System.err.println("Exception when calling BackgroundTasksApi#getById");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -61,7 +61,7 @@ public class Example {
     try {
       ApiResponse<BackgroundTaskOut> response = client
               .backgroundTasks
-              .getTaskById(taskId)
+              .getById(taskId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -69,7 +69,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling BackgroundTasksApi#getTaskById");
+      System.err.println("Exception when calling BackgroundTasksApi#getById");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -104,9 +104,9 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** |  |  -  |
 
-<a name="listRecentTasks"></a>
-# **listRecentTasks**
-> ListResponseBackgroundTaskOut listRecentTasks().status(status).task(task).limit(limit).iterator(iterator).order(order).execute();
+<a name="getPastTasks"></a>
+# **getPastTasks**
+> ListResponseBackgroundTaskOut getPastTasks().status(status).task(task).limit(limit).iterator(iterator).order(order).execute();
 
 List Background Tasks
 
@@ -142,7 +142,7 @@ public class Example {
     try {
       ListResponseBackgroundTaskOut result = client
               .backgroundTasks
-              .listRecentTasks()
+              .getPastTasks()
               .status(status)
               .task(task)
               .limit(limit)
@@ -155,7 +155,7 @@ public class Example {
       System.out.println(result.getPrevIterator());
       System.out.println(result.getDone());
     } catch (ApiException e) {
-      System.err.println("Exception when calling BackgroundTasksApi#listRecentTasks");
+      System.err.println("Exception when calling BackgroundTasksApi#getPastTasks");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -166,7 +166,7 @@ public class Example {
     try {
       ApiResponse<ListResponseBackgroundTaskOut> response = client
               .backgroundTasks
-              .listRecentTasks()
+              .getPastTasks()
               .status(status)
               .task(task)
               .limit(limit)
@@ -179,7 +179,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling BackgroundTasksApi#listRecentTasks");
+      System.err.println("Exception when calling BackgroundTasksApi#getPastTasks");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

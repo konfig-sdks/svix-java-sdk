@@ -4,12 +4,12 @@ All URIs are relative to *https://api.eu.svix.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**checkServerStatus**](HealthApi.md#checkServerStatus) | **GET** /api/v1/health | Health |
+| [**checkStatus**](HealthApi.md#checkStatus) | **GET** /api/v1/health | Health |
 
 
-<a name="checkServerStatus"></a>
-# **checkServerStatus**
-> checkServerStatus().execute();
+<a name="checkStatus"></a>
+# **checkStatus**
+> checkStatus().execute();
 
 Health
 
@@ -36,10 +36,10 @@ public class Example {
     try {
       client
               .health
-              .checkServerStatus()
+              .checkStatus()
               .execute();
     } catch (ApiException e) {
-      System.err.println("Exception when calling HealthApi#checkServerStatus");
+      System.err.println("Exception when calling HealthApi#checkStatus");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -50,10 +50,10 @@ public class Example {
     try {
       client
               .health
-              .checkServerStatus()
+              .checkStatus()
               .executeWithHttpInfo();
     } catch (ApiException e) {
-      System.err.println("Exception when calling HealthApi#checkServerStatus");
+      System.err.println("Exception when calling HealthApi#checkStatus");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

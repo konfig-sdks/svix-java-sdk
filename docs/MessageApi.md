@@ -4,15 +4,15 @@ All URIs are relative to *https://api.eu.svix.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createNew**](MessageApi.md#createNew) | **POST** /api/v1/app/{app_id}/msg | Create Message |
+| [**createNewMsg**](MessageApi.md#createNewMsg) | **POST** /api/v1/app/{app_id}/msg | Create Message |
 | [**deletePayload**](MessageApi.md#deletePayload) | **DELETE** /api/v1/app/{app_id}/msg/{msg_id}/content | Delete message payload |
 | [**getByIdOrEventId**](MessageApi.md#getByIdOrEventId) | **GET** /api/v1/app/{app_id}/msg/{msg_id} | Get Message |
 | [**listAllMessages**](MessageApi.md#listAllMessages) | **GET** /api/v1/app/{app_id}/msg | List Messages |
 
 
-<a name="createNew"></a>
-# **createNew**
-> MessageOut createNew(appId, messageIn).withContent(withContent).idempotencyKey(idempotencyKey).execute();
+<a name="createNewMsg"></a>
+# **createNewMsg**
+> MessageOut createNewMsg(appId, messageIn).withContent(withContent).idempotencyKey(idempotencyKey).execute();
 
 Create Message
 
@@ -54,7 +54,7 @@ public class Example {
     try {
       MessageOut result = client
               .message
-              .createNew(eventType, payload, appId)
+              .createNewMsg(eventType, payload, appId)
               .tags(tags)
               .eventId(eventId)
               .channels(channels)
@@ -73,7 +73,7 @@ public class Example {
       System.out.println(result.getId());
       System.out.println(result.getTimestamp());
     } catch (ApiException e) {
-      System.err.println("Exception when calling MessageApi#createNew");
+      System.err.println("Exception when calling MessageApi#createNewMsg");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -84,7 +84,7 @@ public class Example {
     try {
       ApiResponse<MessageOut> response = client
               .message
-              .createNew(eventType, payload, appId)
+              .createNewMsg(eventType, payload, appId)
               .tags(tags)
               .eventId(eventId)
               .channels(channels)
@@ -100,7 +100,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling MessageApi#createNew");
+      System.err.println("Exception when calling MessageApi#createNewMsg");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
